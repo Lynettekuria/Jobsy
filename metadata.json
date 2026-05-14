@@ -1,0 +1,6 @@
+{
+  "name": "JobAgent AI",
+  "description": "An AI-powered job automation tool that scans job boards, writes personalized cover letters, and tracks applications.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

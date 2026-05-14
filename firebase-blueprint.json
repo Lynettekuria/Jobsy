@@ -1,0 +1,89 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Basic profile information for the user",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "title": { "type": "string" },
+        "location": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "linkedin": { "type": "string" },
+        "portfolio": { "type": "string" },
+        "cvHighlights": { "type": "string" }
+      },
+      "required": ["name", "email"]
+    },
+    "UserPreferences": {
+      "title": "User Preferences",
+      "description": "Job search preferences for the user",
+      "type": "object",
+      "properties": {
+        "roles": { "type": "array", "items": { "type": "string" } },
+        "location": { "type": "string" },
+        "salary": { "type": "string" },
+        "type": { "type": "string" }
+      }
+    },
+    "Schedule": {
+      "title": "Job Schedule",
+      "description": "Automated job scanning schedule",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string" },
+        "frequency": { "type": "string", "enum": ["daily", "weekly", "hourly"] },
+        "cronExpression": { "type": "string" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Execution": {
+      "title": "Job Execution Log",
+      "description": "Record of an automated job run",
+      "type": "object",
+      "properties": {
+        "scheduleId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["success", "failure", "running"] },
+        "logs": { "type": "array", "items": { "type": "string" } },
+        "resultCount": { "type": "number" }
+      }
+    },
+    "Application": {
+      "title": "Job Application",
+      "description": "Record of a submitted job application",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "company": { "type": "string" },
+        "date": { "type": "string" },
+        "status": { "type": "string" },
+        "sentTo": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile document"
+    },
+    "/users/{userId}/preferences/main": {
+      "schema": "UserPreferences",
+      "description": "User preferences document"
+    },
+    "/users/{userId}/schedules/{scheduleId}": {
+      "schema": "Schedule",
+      "description": "Collection of job schedules"
+    },
+    "/users/{userId}/executions/{executionId}": {
+      "schema": "Execution",
+      "description": "Collection of job execution logs"
+    },
+    "/users/{userId}/applications/{applicationId}": {
+      "schema": "Application",
+      "description": "Collection of tracked job applications"
+    }
+  }
+}

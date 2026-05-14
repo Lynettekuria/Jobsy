@@ -1,4 +1,5 @@
 export interface Profile {
+  uid?: string;
   name: string;
   title: string;
   location: string;
@@ -34,10 +35,28 @@ export interface Job {
 }
 
 export interface Application {
-  id: number;
+  id: string;
   title: string;
   company: string;
   date: string;
   status: string;
   sentTo?: string;
+}
+
+export interface Schedule {
+  id: string;
+  role: string;
+  frequency: 'daily' | 'weekly' | 'hourly';
+  cronExpression: string;
+  active: boolean;
+  createdAt: any;
+}
+
+export interface Execution {
+  id: string;
+  scheduleId: string;
+  timestamp: any;
+  status: 'success' | 'failure' | 'running';
+  logs: string[];
+  resultCount: number;
 }
